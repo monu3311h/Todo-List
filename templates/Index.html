@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock title %}
+{% block body %}
+
+
+ <div class="container my-3">
+        <h2>Add a Todo</h2>
+        <form action="/post" method="POST">
+            <div class="mb-3">
+              <label for="title" class="form-label">Todo Title</label>
+              <input type="text" class="form-control" name="title" id="title" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="desc" class="form-label">Todo Description</label>
+              <input type="text" class="form-control" name="desc" id="desc">
+            </div>
+
+            <button type="submit" class="btn btn-dark">Submit</button>
+          </form>
+    </div>
+
+<table class="table">
+  <thead>
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Date</th>
+    </tr>
+  </thead>
+  {% for data in todo %}
+  <tbody>
+    <tr>
+      <th scope="row">{{ data.id }}</th>
+      <td>{{ data.title }}</td>
+      <td>{{ data.desc }}</td>
+      <td>{{ data.date }}</td>
+      <td><a href="/update/{{ data.id }}" type="button" class="btn btn-primary btn-sm">Update</a></td>
+      <td><a href="/delete/{{ data.id }}" type="button" class="btn btn-primary btn-sm">Delete</a></td>
+    </tr>
+  </tbody>
+  {% endfor%}
+</table>
+{% endblock body %}
